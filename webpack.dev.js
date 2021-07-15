@@ -1,6 +1,7 @@
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 // eslint-disable-next-line no-unused-vars
 const webpack = require('webpack'); // to access build-in plugins
+const path = require('path');
 const { merge } = require('webpack-merge');
 const common = require('./webpack.common');
 
@@ -8,7 +9,12 @@ module.exports = merge(common, {
     mode: 'development',
     devtool: 'source-map',
     devServer: {
-        contentBase: './dist',
+        proxy: {
+            '/': {
+                target: 'http://localhost:3000/',
+            },
+        },
+        contentBase: path.join(__dirname, 'dist'),
     },
     module: {
         rules: [
