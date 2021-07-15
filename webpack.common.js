@@ -1,12 +1,10 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 // eslint-disable-next-line no-unused-vars
-const webpack = require('webpack');
+const webpack = require('webpack'); // to access build-in plugins
 const path = require('path');
 
 module.exports = {
-    entry: {
-        index: './src/client/index.js',
-    },
+    entry: './src/client/index.js',
     output: {
         filename: '[name].bundle.js',
         path: path.resolve(__dirname, 'dist'),

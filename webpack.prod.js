@@ -1,7 +1,7 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 // eslint-disable-next-line no-unused-vars
-const webpack = require('webpack');
+const webpack = require('webpack'); // to access build-in plugins
 
 const { merge } = require('webpack-merge');
 const common = require('./webpack.common');
