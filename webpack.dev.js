@@ -7,14 +7,15 @@ const common = require('./webpack.common');
 
 module.exports = merge(common, {
     mode: 'development',
-    devtool: 'source-map',
+    devtool: 'inline-source-map',
     devServer: {
         proxy: {
             '/': {
                 target: 'http://localhost:3000/',
             },
         },
-        contentBase: path.join(__dirname, 'dist'),
+        contentBase: path.resolve(__dirname, 'dist'),
+        hot: true,
     },
     module: {
         rules: [
