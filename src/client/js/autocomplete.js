@@ -1,43 +1,85 @@
-import { generateAutocompleteItems } from './autocompleteHelpers';
+// import { generateAutocompleteItems } from './autocompleteHelpers';
 
-const list = require('./countryList');
+const { countries } = require('./countryList');
 
 /**
- * @params: {Object} input - Form's input element
- * @params: {Array} list - The possible autocompleted values
- * @see: https://www.w3schools.com/howto/howto_js_autocomplete.asp
+ * Create suggested coutry items from the input and appends them to the list container.
+ * @param {HTMLElement} parent - The list container element.
+ * @param {Array} list - List of all the countries.
+ * @param {String} value - The value of the input.
+ */
+const generateAutocompleteItems = (parent, list, value) => {
+    const fragment = new DocumentFragment();
+    list.forEach((country) => {
+        // This checks if country starts with same letters as the value.
+        if (country.substr(0, value.length).toLowerCase() === value.toLowerCase()) {
+            const listItem = document.createElement('div');
+            listItem.innerHTML = `<strong>${country.substr(0, value.length)}</strong>${country.substr(value.length)}`;
+            // This sets a data attr that will hold the value of the item.
+            listItem.setAttribute('data-value', country);
+            // This gives the item a class.
+            listItem.setAttribute('class', 'autocomplete-list-item');
+            fragment.appendChild(listItem);
+        }
+        parent.appendChild(fragment);
+    });
+};
+
+const emptyListContainer = () => {
+    const element = document.querySelector('.autocomplete-items-list');
+    element.innerHTML = '';
+};
+
+const removeListContainer = () => {
+    console.log('list removed!');
+    const element = document.querySelector('.autocomplete-items-list');
+    element.remove();
+};
+
+const itemListClickHandler = (event) => {
+    if (event.target.classList.contains('autocomplete-list-item')) {
+        document.querySelector('#country-input').value = event.target.dataset.value;
+        removeListContainer();
+    }
+};
+
+/**
+ * Main handler of the autocomplete feature.
+ * @param {HTMLElement} inputElm - Form's input element.
+ * @see {@link https://www.w3schools.com/howto/howto_js_autocomplete.asp}.
  */
 const autocomplete = (inputElm) => {
-    // This will help to highlight the selected item in the list.
-    let currentFocus;
-    // This listens for user input.
-    // inputElm.addEventListener('input', () => {
-    // This holds the value from the input.
+    let listContainer;
+    // This will holds the parent node.
+    const parent = inputElm.parentNode;
+    //  This holds the value from the input.
     const { value } = inputElm;
-    // This closes any open lists.
-    closeAllList();
-    if (!value) return false;
-    currentFocus = -1;
-    // This creates a container to hold the list items.
-    const listContainer = document.createElement('div');
-    listContainer.setAttribute('id', `${inputElm.id}-autocomplete-list`);
-    listContainer.setAttribute('class', 'autocomplete-items');
-    // This appends the list countainer to the input container.
-    inputElm.parentNode.appendChild(listContainer);
-    // This generates items for the auto complete box.
-    generateAutocompleteItems(listContainer, list.countries, value);
-    // listContainer.appendChild(items);
-    // Update the input with an item from the autocomplete list.
-    listContainer.addEventListener('click', (event) => {
-        /** This will serve as an event delegation, will only run the event
-         *  if the target is an item of the suggested list
-         * */
-        if (event.target.classList.contains('autocomplete-list-item')) {
-            // eslint-disable-next-line no-param-reassign
-            inputElm.value = event.target.dataSet.value;
-        }
-    });
-    // });
+    // This will check the DOM for existing listContainer.
+    const hasListContainer = !!document.querySelector('.autocomplete-items-list');
+    // If no value, empty list and return false.
+    if (!value && hasListContainer) {
+        removeListContainer();
+        return false;
+    }
+    // If listContainer already exist, empty it.
+    if (hasListContainer) {
+        listContainer = document.querySelector('.autocomplete-items-list');
+        // This removes any event handler attached to the list items.
+        listContainer.removeEventListener('click', itemListClickHandler);
+        emptyListContainer();
+    } else {
+        // Else if listContainer doesn't exist, create it.
+        // This creates a container to hold the list of suggested items.
+        listContainer = document.createElement('div');
+        // This gives listContainer a class.
+        listContainer.setAttribute('class', 'autocomplete-items-list');
+        // This appends listContainer to the input's parent.
+        parent.appendChild(listContainer);
+    }
+    // This generates items for the listContainer.
+    generateAutocompleteItems(listContainer, countries, value);
+    // This adds click event to listen on the list items.
+    listContainer.addEventListener('click', itemListClickHandler);
 };
 
 export default autocomplete;
