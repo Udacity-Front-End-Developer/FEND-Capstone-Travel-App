@@ -32,22 +32,28 @@ const generateAutocompleteItems = (parent, list, value) => {
 
 const generateAutocompleteItems = (parent, list, value) => {
     const fragment = new DocumentFragment();
-    fetch('http://api.geonames.org/searchJSON?q=vlue&maxRows=5&fuzzy=0&username=anes')
+    fetch(`http://api.geonames.org/searchJSON?q=${value}&maxRows=5&fuzzy=0&username=anes`)
         .then((response) => response.json())
-        .then((data) => console.log(data));
-    list.forEach((country) => {
-        // This checks if country starts with same letters as the value.
-        if (country.substr(0, value.length).toLowerCase() === value.toLowerCase()) {
-            const listItem = document.createElement('div');
-            listItem.innerHTML = `<strong>${country.substr(0, value.length)}</strong>${country.substr(value.length)}`;
-            // This sets a data attr that will hold the value of the item.
-            listItem.setAttribute('data-value', country);
-            // This gives the item a class.
-            listItem.setAttribute('class', 'autocomplete-list-item');
-            fragment.appendChild(listItem);
-        }
-    });
-    parent.appendChild(fragment);
+        .then((data) => {
+            Object.values(data)[1].forEach((obj) => {
+                console.log(obj.name); // LOG
+
+                const listItem = document.createElement('div');
+                // TODO: for fuzzy search, add a fucntion that bold the first coresponding letter. eg: imput = 'ben aous' output='<strong>ben a</strong>+ous'
+                // This checks if country starts with same letters as the value.
+                if (obj.name.substr(0, value.length).toLowerCase() === value.toLowerCase()) {
+                    listItem.innerHTML = `<strong>${obj.name.substr(0, value.length)}</strong>${obj.name.substr(value.length)}, ${obj.countryName}`;
+                } else {
+                    listItem.innerHTML = `${obj.name.substr(0, value.length)}${obj.name.substr(value.length)}, ${obj.countryName}`;
+                }
+                // This sets a data attr that will hold the value of the item.
+                listItem.setAttribute('data-value', obj.name);
+                // This gives the item a class.
+                listItem.setAttribute('class', 'autocomplete-list-item');
+                fragment.appendChild(listItem);
+            });
+            parent.appendChild(fragment);
+        });
 };
 
 const emptyListContainer = () => {
