@@ -8,8 +8,33 @@ const { countries } = require('./countryList');
  * @param {Array} list - List of all the countries.
  * @param {String} value - The value of the input.
  */
+
+/* // LEGACY
 const generateAutocompleteItems = (parent, list, value) => {
     const fragment = new DocumentFragment();
+    list.forEach((country) => {
+        // This checks if country starts with same letters as the value.
+        if (country.substr(0, value.length).toLowerCase() === value.toLowerCase()) {
+            const listItem = document.createElement('div');
+            listItem.innerHTML = `<strong>
+            ${country.substr(0, value.length)}
+            </strong>${country.substr(value.length)}`;
+            // This sets a data attr that will hold the value of the item.
+            listItem.setAttribute('data-value', country);
+            // This gives the item a class.
+            listItem.setAttribute('class', 'autocomplete-list-item');
+            fragment.appendChild(listItem);
+        }
+        parent.appendChild(fragment);
+    });
+};
+*/
+
+const generateAutocompleteItems = (parent, list, value) => {
+    const fragment = new DocumentFragment();
+    fetch('http://api.geonames.org/searchJSON?q=vlue&maxRows=5&fuzzy=0&username=anes')
+        .then((response) => response.json())
+        .then((data) => console.log(data));
     list.forEach((country) => {
         // This checks if country starts with same letters as the value.
         if (country.substr(0, value.length).toLowerCase() === value.toLowerCase()) {
@@ -21,8 +46,8 @@ const generateAutocompleteItems = (parent, list, value) => {
             listItem.setAttribute('class', 'autocomplete-list-item');
             fragment.appendChild(listItem);
         }
-        parent.appendChild(fragment);
     });
+    parent.appendChild(fragment);
 };
 
 const emptyListContainer = () => {
@@ -31,7 +56,6 @@ const emptyListContainer = () => {
 };
 
 const removeListContainer = () => {
-    console.log('list removed!');
     const element = document.querySelector('.autocomplete-items-list');
     element.remove();
 };
@@ -64,22 +88,24 @@ const autocomplete = (inputElm) => {
     // If listContainer already exist, empty it.
     if (hasListContainer) {
         listContainer = document.querySelector('.autocomplete-items-list');
-        // This removes any event handler attached to the list items.
-        listContainer.removeEventListener('click', itemListClickHandler);
         emptyListContainer();
     } else {
-        // Else if listContainer doesn't exist, create it.
+        /**
+         * Else if listContainer doesn't exist, create it and attach an event
+         * listener to it.
+         * The event listener is attached once we create listContainer.
+         */
         // This creates a container to hold the list of suggested items.
         listContainer = document.createElement('div');
         // This gives listContainer a class.
         listContainer.setAttribute('class', 'autocomplete-items-list');
         // This appends listContainer to the input's parent.
         parent.appendChild(listContainer);
+        // This adds click event to listen on the list items.
+        listContainer.addEventListener('click', itemListClickHandler);
     }
     // This generates items for the listContainer.
     generateAutocompleteItems(listContainer, countries, value);
-    // This adds click event to listen on the list items.
-    listContainer.addEventListener('click', itemListClickHandler);
 };
 
 export default autocomplete;
