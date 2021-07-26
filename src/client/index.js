@@ -10,7 +10,6 @@ function debounce(func, timeout = 300) {
         timer = setTimeout(() => { func.apply(this, args); }, timeout);
     };
 }
-
 const debouncedAutocomplete = debounce((event) => autocomplete(event.target), 300);
 
 document.querySelector('#country-input').addEventListener('input', (e) => debouncedAutocomplete(e));

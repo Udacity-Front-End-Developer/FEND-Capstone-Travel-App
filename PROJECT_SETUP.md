@@ -6,8 +6,9 @@
   - [x] Setup the Express App
   - [x] Configure Error and Not Found Middlewares
 - [ ] Setup Client
-  - [ ] View - Add a Form with Autocompetion
-- [ ] Setup Webpack
+  - [x] View - Add a Form with Autocompetion feature
+  - [ ]
+- [x] Setup Webpack
   - [x] Install Loaders and Plugins
     - [x] Loaders
       - [x] Babel-loader
@@ -24,6 +25,6 @@
       - [x] ~~Install and Add terser-webpack-plugin - Prod~~ _**v5 ships whit terser**_
   - [x] Setup Seperate Files Config for Dev and Prod
   - [x] Setup a Common File Config
-  - [ ] Setup Hot Modules Replacement in Dev Mode
+  - [x] Setup Hot Modules Replacement in Dev Mode
   - [ ] Configure Service Worker
 - [x] Setup Babel config file

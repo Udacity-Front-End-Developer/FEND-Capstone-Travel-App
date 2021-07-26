@@ -1,9 +1,4 @@
-// import { generateAutocompleteItems } from './autocompleteHelpers';
-
-const { countries } = require('./countryList');
-
-/**
- * Create suggested coutry items from the input and appends them to the list container.
+/** Create suggested coutry items from the input and appends them to the list container.
  * @param {HTMLElement} parent - The list container element.
  * @param {Array} list - List of all the countries.
  * @param {String} value - The value of the input.
@@ -30,20 +25,27 @@ const generateAutocompleteItems = (parent, list, value) => {
 };
 */
 
-const generateAutocompleteItems = (parent, list, value) => {
+const generateAutocompleteItems = (parent, value) => {
+    // This initialize a document fragment that will serve as container
     const fragment = new DocumentFragment();
+    // The API call
+    // FIXME: Exposed username
     fetch(`http://api.geonames.org/searchJSON?q=${value}&maxRows=5&fuzzy=0&username=anes`)
         .then((response) => response.json())
         .then((data) => {
             Object.values(data)[1].forEach((obj) => {
-                console.log(obj.name); // LOG
-
+                // LOG
+                console.log(obj.name);
                 const listItem = document.createElement('div');
-                // TODO: for fuzzy search, add a fucntion that bold the first coresponding letter. eg: imput = 'ben aous' output='<strong>ben a</strong>+ous'
+                // TODO: for fuzzy search, add a fucntion that bolds the first coresponding letter.
+                // eg: input = 'ben aous' output='<strong>ben a</strong>+ous'
                 // This checks if country starts with same letters as the value.
                 if (obj.name.substr(0, value.length).toLowerCase() === value.toLowerCase()) {
-                    listItem.innerHTML = `<strong>${obj.name.substr(0, value.length)}</strong>${obj.name.substr(value.length)}, ${obj.countryName}`;
+                    // If same initials, print the initals in bold + the rest of the string.
+                    listItem.innerHTML = `<strong>${obj.name.substr(0, value.length)}</strong>\
+                    ${obj.name.substr(value.length)}, ${obj.countryName}`;
                 } else {
+                    // Else, print the string.
                     listItem.innerHTML = `${obj.name.substr(0, value.length)}${obj.name.substr(value.length)}, ${obj.countryName}`;
                 }
                 // This sets a data attr that will hold the value of the item.
@@ -99,7 +101,7 @@ const autocomplete = (inputElm) => {
         /**
          * Else if listContainer doesn't exist, create it and attach an event
          * listener to it.
-         * The event listener is attached once we create listContainer.
+         * The event(click) listener is attached once we create listContainer.
          */
         // This creates a container to hold the list of suggested items.
         listContainer = document.createElement('div');
@@ -111,7 +113,7 @@ const autocomplete = (inputElm) => {
         listContainer.addEventListener('click', itemListClickHandler);
     }
     // This generates items for the listContainer.
-    generateAutocompleteItems(listContainer, countries, value);
+    generateAutocompleteItems(listContainer, value);
 };
 
 export default autocomplete;
