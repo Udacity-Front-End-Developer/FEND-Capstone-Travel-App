@@ -30,18 +30,18 @@ const generateAutocompleteItems = (parent, value) => {
     const fragment = new DocumentFragment();
     // The API call
     // FIXME: Exposed username
-    fetch(`http://api.geonames.org/searchJSON?q=${value}&maxRows=5&fuzzy=0&username=anes`)
+    fetch(`http://api.geonames.org/searchJSON?q=&name_startsWith=${value}&maxRows=5&fuzzy=1&username=anes`)
         .then((response) => response.json())
         .then((data) => {
             Object.values(data)[1].forEach((obj) => {
-                // LOG
-                console.log(obj.name);
+                // eslint-disable-next-line no-use-before-define
+                emptyListContainer();
                 const listItem = document.createElement('div');
                 // TODO: for fuzzy search, add a fucntion that bolds the first coresponding letter.
                 // eg: input = 'ben aous' output='<strong>ben a</strong>+ous'
                 // This checks if country starts with same letters as the value.
                 if (obj.name.substr(0, value.length).toLowerCase() === value.toLowerCase()) {
-                    // If same initials, print the initals in bold + the rest of the string.
+                    // If same initials, print the initials in bold + the rest of the string.
                     listItem.innerHTML = `<strong>${obj.name.substr(0, value.length)}</strong>\
                     ${obj.name.substr(value.length)}, ${obj.countryName}`;
                 } else {
@@ -60,9 +60,11 @@ const generateAutocompleteItems = (parent, value) => {
 
 const emptyListContainer = () => {
     const element = document.querySelector('.autocomplete-items-list');
-    element.innerHTML = '';
+    // element.innerHTML = '';
+    element.childNodes.forEach((child) => {
+        element.removeChild(child);
+    });
 };
-
 const removeListContainer = () => {
     const element = document.querySelector('.autocomplete-items-list');
     element.remove();
@@ -96,7 +98,7 @@ const autocomplete = (inputElm) => {
     // If listContainer already exist, empty it.
     if (hasListContainer) {
         listContainer = document.querySelector('.autocomplete-items-list');
-        emptyListContainer();
+        // emptyListContainer();
     } else {
         /**
          * Else if listContainer doesn't exist, create it and attach an event
