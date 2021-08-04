@@ -1,21 +1,20 @@
 import './styles/base.scss';
 import './styles/form.scss';
-import autocomplete from './js/autocomplete';
+// import test from './img/test.png';
+// import seaFront from './img/sea-front.png'
+// require './img'/;
+import countryInputHandler from './js/countryInputHandler';
 
-// Debouce function
-function debounce(func, timeout = 300) {
-    let timer;
-    return (...args) => {
-        clearTimeout(timer);
-        timer = setTimeout(() => { func.apply(this, args); }, timeout);
-    };
-}
-const debouncedAutocomplete = debounce((event) => autocomplete(event.target), 300);
-
-document.querySelector('#country-input').addEventListener('input', (e) => debouncedAutocomplete(e));
+let req = require.context('./img/', false, /.*\.png/);
+req.keys().forEach((key) => {
+  req(key);
+});
 
 // // Updates value with selected country from the suggestion list.
-// document.querySelector('.autocomplete-list-item').addEventListener()
+document.querySelector('#country-input').addEventListener('input', (e) => countryInputHandler(e));
+
+// document.querySelector('img').src = test;
+
 if (module.hot) {
-    module.hot.accept();
+  module.hot.accept();
 }
