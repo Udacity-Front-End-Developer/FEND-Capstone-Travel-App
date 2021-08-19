@@ -1,4 +1,5 @@
 import countryInputHandler from './js/countryInputHandler';
+import dynamicTextHandler from './dynamic';
 
 /**
 *The following import functions are a solution to require all the files in the
@@ -8,6 +9,7 @@ import countryInputHandler from './js/countryInputHandler';
 const importAllStyles = (request) => {
   request.keys().forEach((key) => request(key));
 };
+
 importAllStyles(require.context('./styles/', false, /\.scss$/));
 
 const imagesImport = require.context('./img/', false, /.*\.(png|jpg)/);
@@ -16,9 +18,8 @@ imagesImport.keys().forEach((key) => {
 });
 
 // // Updates value with selected country from the suggestion list.
-document.querySelector('#country-input').addEventListener('input', (e) => countryInputHandler(e));
-
-// document.querySelector('img').src = test;
+document.querySelector('#country-input')
+  .addEventListener('input', (e) => countryInputHandler(e));
 
 /*
 Grap data from the user.
@@ -33,8 +34,9 @@ document.querySelector('.form__submit').addEventListener('click', (e) => {
   console.log(countryData, date);
 });
 
-// This adds image background to hero
-// document.querySelector('.hero').style.background = 'url(./img/hero.jpg)';
+window.addEventListener('load', dynamicTextHandler);
+
+localStorage.setItem('name', 'Anes');
 
 if (module.hot) {
   module.hot.accept();
