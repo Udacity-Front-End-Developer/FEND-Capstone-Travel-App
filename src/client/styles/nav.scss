@@ -1,0 +1,24 @@
+.header-container {
+    font-family: 'Source Sans Pro';
+    align-items: center;
+    font-size: 1rem;
+}
+
+.brand {
+    font-size: 1em;
+}
+
+.nav {
+    display: flex;
+    list-style: none;
+}
+
+.nav__item {
+    font-size: 1.2rem;
+    margin-left: 2rem;
+}
+
+.nav__item a {
+    text-decoration: none;
+    color: #fff;
+}

@@ -1,5 +1,5 @@
 import countryInputHandler from './js/countryInputHandler';
-import dynamicTextHandler from './dynamic';
+// import './styles/base.scss';
 
 /**
 *The following import functions are a solution to require all the files in the
@@ -33,8 +33,6 @@ document.querySelector('.form__submit').addEventListener('click', (e) => {
   const date = document.querySelector('#date').value;
   console.log(countryData, date);
 });
-
-window.addEventListener('load', dynamicTextHandler);
 
 localStorage.setItem('name', 'Anes');
 
