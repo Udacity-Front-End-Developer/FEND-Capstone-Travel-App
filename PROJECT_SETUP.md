@@ -28,3 +28,9 @@
   - [x] Setup Hot Modules Replacement in Dev Mode
   - [ ] Configure Service Worker
 - [x] Setup Babel config file
+
+## Functionality
+
+- [ ] Get longitude latitude and country from geonames API
+- [ ] Countdown
+- [ ] 

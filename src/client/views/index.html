@@ -2,53 +2,47 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Trip Planner</title>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trip Planner</title>
 </head>
 
 <body>
-    <!-- HEADER SECTION -->
-    <header class="header-container container">
-        <div class="brand">LOGO</div>
-        <ul class="nav">
-            <li class="nav__item"><a href="#">about us</a></li>
-            <li class="nav__item"><a href="#">discover</a></li>
-            <li class="nav__item"><a href="#">my trips</a></li>
-        </ul>
-    </header>
+  <!-- HEADER SECTION -->
+  <header class="header-container container">
+    <div class="brand">LOGO</div>
+    <ul class="nav">
+      <li class="nav__item"><a href="#">about us</a></li>
+      <li class="nav__item"><a href="#">discover</a></li>
+      <li class="nav__item"><a href="#">my trips</a></li>
+    </ul>
+  </header>
 
-    <!-- HERO SECTION -->
-    <section class="hero container">
-        <div class="headline">
-            <h1 class="headline__head">
-                We help you plan your trips
-            </h1>
-            <div class="headline__subhead">
-                <p>Everything you need in one place</p>
-            </div>
-            <button class="hero__btn">New Trip</button>
-        </div>
-        <!-- <div>Hi there</div> -->
-    </section>
+  <!-- HERO SECTION -->
+  <section class="hero container">
+    <div class="headline">
+      <h1 class="headline__head"> We help you plan your trips
+      </h1>
+      <div class="headline__subhead">
+        <p>Everything you need in one place</p>
+      </div>
+      <button class="hero__btn">New Trip</button>
+    </div>
+  </section>
 
-    <section class="wrapper">
-        <form action="" autocomplete="off" class="form">
-            <div class="input-container">
-                <input type="text" id="country-input" name="country" placeholder="Country..." />
-            </div>
-            <button class="form__submit">Submit</button>
-        </form>
-    </section>
-
-    <!-- Date picker -->
-    <section class="wrapper">
-        <label>
-            Enter the trip date:
-            <input type="date" id="date">
-        </label>
-    </section>
+  <!-- INPUT-->
+  <section class="form-wrapper container">
+    <form action="" autocomplete="off" class="form">
+      <div class="input-container">
+        <input type="text" id="country-input" class="user-input" name="country" placeholder="Country..." />
+      </div>
+      <div>
+        <input type="date" class="user-input" id="date">
+      </div>
+      <button class="form__submit">Save</button>
+    </form>
+  </section>
 
 </body>
 
