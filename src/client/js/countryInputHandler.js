@@ -11,6 +11,6 @@ const debounce = (func, timeout) => {
 
 const countryInputHandler = debounce((event) => {
     autocomplete(event.target);
-}, 100);
+}, 0);
 
 export default countryInputHandler;

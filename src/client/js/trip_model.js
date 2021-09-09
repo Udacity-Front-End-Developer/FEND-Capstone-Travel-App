@@ -1,22 +1,24 @@
+console.log('trip');
 class Trip {
-    constructor(city, country, date, imageUrl) {
+    constructor(city, country, longitude, lattitude, createdAt) {
         this.city = city;
         this.country = country;
-        this.date = date;
-        this.imageUrl = imageUrl;
+        this.longitude = longitude;
+        this.lattitude = lattitude;
+        this.createdAt = createdAt;
     }
 
     remove() {
         // old arrayOfTrips.
         const arrayOfTrips = localStorage.getObjectItem('trips');
         // remove the obj from the array.
-        arrayOfTrips.forEach((trip) => {
+        arrayOfTrips.forEach((trip, i) => {
             if (trip.city === this.city) {
-                arrayOfTrips.splice(i, 1);
-                break;
+                return arrayOfTrips.splice(i, 1);
             }
         });
         // update localStorage with the new arrayOfTrips.
         localStorage.setObjectItem('trips', arrayOfTrips);
     }
 }
+export default Trip;

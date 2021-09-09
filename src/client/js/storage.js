@@ -9,8 +9,3 @@ Storage.prototype.getObjectItem = function getObjectItem(key) {
     return JSON.parse(this.getItem(key));
 };
 
-const addTrip = (trip) => {
-    const arrayOfTrips = localStorage.getObjectItem('trips');
-    arrayOfTrips.push(trip);
-    localStorage.setObjectItem('trips', arrayOfTrips);
-};

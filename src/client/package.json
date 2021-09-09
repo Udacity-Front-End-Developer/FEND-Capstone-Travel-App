@@ -12,16 +12,12 @@
 	"author": "Anes-Marzooki",
 	"license": "ISC",
 	"dependencies": {
-		"cors": "^2.8.5",
-		"dotenv": "^10.0.0",
-		"express": "^4.17.1",
-		"helmet": "^4.6.0",
-		"morgan": "^1.10.0",
 		"webpack": "^5.44.0",
 		"webpack-cli": "^4.7.2"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.14.6",
+		"@babel/plugin-transform-runtime": "^7.15.0",
 		"@babel/preset-env": "^7.14.7",
 		"babel-loader": "^8.2.2",
 		"clean-webpack-plugin": "^4.0.0-alpha.0",
@@ -32,7 +28,6 @@
 		"eslint-plugin-import": "^2.23.4",
 		"html-webpack-plugin": "^5.3.2",
 		"mini-css-extract-plugin": "^2.1.0",
-		"nodemon": "^2.0.12",
 		"sass": "^1.35.2",
 		"sass-loader": "^12.1.0",
 		"style-loader": "^3.0.0",
