@@ -1,9 +1,13 @@
+const dotenv = require('dotenv');
+
+dotenv.config();
+
 const express = require('express');
 const path = require('path');
 const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
-const apiCall = require('./apiCalls');
+const apiCalls = require('./apiCalls');
 
 const app = express();
 
@@ -24,40 +28,52 @@ app.use(
     }),
 );
 
+/*
+** This is a test route
+*/
+app.get('/test', (req, res) => {
+    res.send({ success: 'true' });
+});
+
+/**
+* Renders the page index.
+*/
 app.get('/', (_req, res) => {
     res.sendFile(path.resolve('dist/index.html'));
 });
 
-// app.get('/api', (req, res) => console.log('/api'));
-
+/**
+* Handles post requests coming from user country input.
+*/
 app.post('/api/coordination', (req, res) => {
-    console.log(req.body);
-    let data;
-    (async () => {
-        data = await require('./apiCalls')(req.body.val);
-        console.log(data);
-        res.send(data);
-    })();
+    apiCalls.geonames(req.body.val, process.env.GEONAME_KEY)
+        .then((data) => res.send(data));
 });
 
+/**
+* Handles post requests for getting city image.
+*/
+app.post('/api/image', (req, res) => {
+    apiCalls.fetchImage(req.body.trip, process.env.PIXABAY_KEY)
+        .then((data) => res.send(data));
+});
+
+/**
+* Handles post requests for getting weather information.
+*/
+app.post('/api/weather', (req, res) => {
+    apiCalls.fetchWeather(req.body.trip, req.body.days, process.env.WEATHER_KEY)
+        .then((data) => res.send(data));
+});
+
+/**
+* Renders the page trips.
+*/
 app.get('/trips', (_req, res) => {
     res.sendFile(path.resolve('dist/trips.html'));
 });
 
-// app.use((req, res, next) => {
-//     const error = new Error(`Not Found - ${req.originalUrl}`);
-//     res.status(404);
-//     next(error);
-// });
-
-// eslint-disable-next-line no-unused-vars
-// app.use((error, _req, res, _next) => {
-//     const status = res.statusCode === 200 ? 500 : res.statusCode;
-//     res.status(status);
-//     res.json({
-//         msg: error.msg,
-//         stack: error.stack,
-//     });
-// });
-
+/*
+** exports the app instance.
+*/
 module.exports = app;

@@ -1,0 +1,53 @@
+.hero {
+    color: #fff;
+    background-color: var(--main_blue);
+    height: 100vh;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding-bottom: 5vw;
+    &__btn {
+        color: #fff;
+        border: 1px solid #fff;
+        background-color: transparent;
+        width: 60%;
+        font-size: 2em;
+        font-weight: 700;
+        padding: 0.3em;
+        cursor: pointer;
+        font-family: 'Roboto';
+        & a {
+            text-decoration: none;
+            color: inherit;
+            font-size: inherit;
+        }
+    }
+}
+
+
+.headline {
+    display: flex;
+    flex-direction: column;
+    max-width: 42rem;
+    & .headline__head {
+        font-family: 'Montserrat';
+        font-weight: 900;
+        font-size: 4.5em;
+        margin-bottom: 2.5vh;
+        line-height: 1.4;
+    }
+    &__subhead {
+        font-family: 'Work Sans';
+        font-size: 2.5em;
+        line-height: 1.4;
+        margin-bottom: 5vh;
+    }
+}
+
+@media screen and (max-width: 680px) {
+  .headline {
+      & .headline__head {
+          font-size: 3em;
+      }
+  }
+}

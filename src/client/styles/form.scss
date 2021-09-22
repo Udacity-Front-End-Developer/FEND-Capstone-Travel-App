@@ -1,14 +1,16 @@
 .form-wrapper {
-	background-color: var(--main_blue);
-    border: 1px solid red;
+    background-color: #1B2746;
     position: absolute;
     z-index: 5;
-	// height: 100vh;
-	width: 80vw;
     display: flex;
     flex-direction: column;
 	justify-content: center;
 	align-items: center;
+    max-width: 80%;
+    height: 50%;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+	background-color: #1B2746;
+    backdrop-filter: blur(100px);
 }
 
 .form {
@@ -16,13 +18,18 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    h1 {
+        color: #fff;
+        font-family: 'Source Sans Pro', sans-serif;
+        font-size: 2rem;
+    }
 }
 
 .user-input {
 	width: 13rem;
-    margin-top: 2vh;
     padding: 0.5em;
-    border: none;
+    border-radius: 1em;
+    // border: none;
     margin-bottom: 2vh;
     &:focus-visible {
     outline: 1px solid var(--blue_purple);
@@ -33,11 +40,6 @@
     position: relative;
 }
 
-/*TODO
-1.change class name to 'results'
-2. give it a role att of 'listbox'
-3.make it a list 
- */
 .results {
     background-color: #fff;
     z-index: 99;
@@ -52,12 +54,6 @@
     }
 }
 
-/* TODO: 
-1. change class name to 'result-item'
-2. give it role attr
-3. area-selected true or false
-4. give it class 'result-item-active' when on hover
-*/
 .result-item {
     padding: 0.5em;
     display: flex;
@@ -74,3 +70,34 @@
     }
 }
 
+.submit-btn {
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 1.5rem;
+    margin-top: 1.3rem;
+    border-radius: 2rem;
+    padding: 0.2rem 0.8rem;
+    // margin-bottom: 0.5em;
+    border: 1px solid #fff;
+    width: 7rem;
+    color: #fff;
+    background-color: transparent;
+    &:hover {
+        color: #1B2746; 
+        background-color: #fff;
+    }
+}
+
+.close-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: red;
+}
+
+.error {
+    color: #ff0000;
+    padding-top: 1em;
+    font-family: 'Montserrat';
+    font-size: 1em;
+    font-weight: bold;
+}

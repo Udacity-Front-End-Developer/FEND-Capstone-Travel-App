@@ -8,4 +8,3 @@ Storage.prototype.setObjectItem = function setObjectItem(key, value) {
 Storage.prototype.getObjectItem = function getObjectItem(key) {
     return JSON.parse(this.getItem(key));
 };
-
