@@ -28,7 +28,7 @@
 .user-input {
 	width: 13rem;
     padding: 0.5em;
-    border-radius: 1em;
+    // border-radius: 1em;
     // border: none;
     margin-bottom: 2vh;
     &:focus-visible {
@@ -74,7 +74,7 @@
     font-family: 'Source Sans Pro', sans-serif;
     font-size: 1.5rem;
     margin-top: 1.3rem;
-    border-radius: 2rem;
+    // border-radius: 2rem;
     padding: 0.2rem 0.8rem;
     // margin-bottom: 0.5em;
     border: 1px solid #fff;
@@ -91,7 +91,14 @@
     position: absolute;
     top: 0;
     right: 0;
-    color: red;
+    color: #fff;
+    width: 2rem;
+    height: 2rem;
+    font-size: 1.3em;
+    background-color: transparent;
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .error {

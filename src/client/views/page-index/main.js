@@ -9,5 +9,5 @@ import '../../js/storage';
 ** Enables hot reload for webpack server.
 */
 if (module.hot) {
-    module.hot.accept();
+  module.hot.accept();
 }

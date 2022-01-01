@@ -7,26 +7,26 @@ const { merge } = require('webpack-merge');
 const common = require('./webpack.common');
 
 module.exports = merge(common, {
-    mode: 'production',
-    module: {
-        rules: [
-            {
-                test: /\.scss$/,
-                /* Shortcut to: rules.use: [ { loader: 'style-loader, ...}]
-                *@see: https://webpack.js.org/configuration/module/#ruleuse
-                * */
-                use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
-            },
-        ],
-    },
-    plugins: [
-        new MiniCssExtractPlugin(),
+  mode: 'production',
+  module: {
+    rules: [
+      {
+        test: /\.scss$/,
+        /* Shortcut to: rules.use: [ { loader: 'style-loader, ...}]
+        *@see: https://webpack.js.org/configuration/module/#ruleuse
+        * */
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+      },
     ],
-    optimization: {
-        minimizer: [
-            // eslint-disable-next-line quotes
-            `...`,
-            new CssMinimizerPlugin(),
-        ],
-    },
+  },
+  plugins: [
+    new MiniCssExtractPlugin(),
+  ],
+  optimization: {
+    minimizer: [
+      // eslint-disable-next-line quotes
+      `...`,
+      new CssMinimizerPlugin(),
+    ],
+  },
 });
