@@ -31,7 +31,7 @@ A travel scheduling app made in **vanilla Javascript** that:
 ## Rubric
 
 This project has been evaluated by a Udacity code reviewer according to the
-Evaluate a news article with Natural Language Processing project specifications below.
+Evaluate a news article with Travel Planner App specifications below.
 
 <details>
 <summary>Project specification:</summary>
